@@ -163,6 +163,14 @@ jobs:
       - name: Move assets to root
         run: mv assets/release.zip release.zip
 
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
+          submodules: recursive
+
       - name: Prepare standalone PM2 config
         run: cp pm2/ecosystem.config.js ecosystem.config.js
 
